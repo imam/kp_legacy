@@ -96,7 +96,7 @@
 				async code(code) {
 					if(code){
 						let backend = 'https://cph-kelaspendek.herokuapp.com'
-						if (window.location.hostname === "localhost" || window.location.hostname === "" || window.location.hostname === "127.0.0.1" || window.location.hostname.indexOf(myUrlPattern) >= 0) {
+						if (window.location.hostname === "localhost" || window.location.hostname === "" || window.location.hostname === "127.0.0.1") {
 							backend = 'http://localhost:3000'
 						}
 						const {data} = await axios.get(`${backend}/?code=${this.code}`)
