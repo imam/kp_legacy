@@ -2,115 +2,16 @@
 <html>
 <head>
 	<title>KelasPendek</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha256-2YQRJMXD7pIAPHiXr0s+vlRWA7GYJEK0ARns7k2sbHY=" crossorigin="anonymous" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js" integrity="sha256-chlNFSVx3TdcQ2Xlw7SvnbLAavAQLO0Y/LBiWX04viY=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" ></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="app" class="container" style="margin-top: 5em">
-		<form @submit.prevent="incorrect = false;code = code_input; selected_day = null">
-			<input v-model="code_input" type="text" placeholder="Kode">
-			<button>Submit</button>
-		</form>
-		<p v-if="code && days.length == 0 && !incorrect ">Loading data...</p>
-		<p v-if="incorrect">Kode Anda Salah</p>
-		<select v-model="selected_day" v-if="code && days.length > 0 && !incorrect" id="">
-			<option :value="null">Pilih Hari</option>
-			<option v-for="day in days" :value="day.day">{{day.day}}</option>
-		</select>
-		<p v-if="selected_day">
-			Halo (calon developer)<br><br>
-
-			Yuk kita mulai belajar, DAY {{selected_day}} CLONE PRODUCT HUNT!<br><br>
-
-			Videonya:<br>
-
-			<span v-for="video in videos">
-				{{video.title}}	({{video.duration[7] === undefined ? '< 1 Menit' : `> ${video.duration[7]} Menit`}})<br><br>
-				<a :href="video.link" target="_blank">{{video.link}}</a><br><br>
-			</span>
-			
-		</p>
+	<div id="app" >
+		
 	</div>	
-	<script>
-		new Vue({
-			el: "#app",
-			data: {
-				selected_day: null,
-				days: [],
-				day: 4,
-				minutes: 21,
-				videos: [
-				{
-					title: 'Kepo',
-					link: 'https://www.youtube.com/watch?v=Y5uFQCZs3dQ&list=PLp_AnBPM26vrPG7XxZgMssE4V80uJRhVe&index=2&t=0s',
-					duration: '< 1 Menit'
-				}
-				],
-				code: null,
-				code_input: null,
-				incorrect: false
-			},
-			computed: {
-				current_day() {
-					return this.days.filter(day => {
-						return day.day == this.selected_day
-					})[0];
-				}
-			},
-			watch: {
-				async selected_day() {
-					this.videos = [];
-					const {data} = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Csnippet&playlistId=${this.current_day.playlistId}&key=AIzaSyDf8w95QHTSC8UjNUMGefOHteP0R5n-lJY`)
-
-					const videos = data.items.map(video => {
-						return {
-							title: video.snippet.title,
-							link: `https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}&list=PLp_AnBPM26vrPG7XxZgMssE4V80uJRhVe`,
-							id: video.snippet.resourceId.videoId
-						}
-					})
-
-					const videoIds = videos.map(video => {
-						return video.id
-					})
-
-					const urlSafe = encodeURIComponent(videoIds.join(','))
-
-					const {data: videoDetailsData} = await axios
-					.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${urlSafe}&key=AIzaSyDf8w95QHTSC8UjNUMGefOHteP0R5n-lJY`)
-
-					const videosWithDuration = videos.map((video, key) =>{
-						return {
-							...video,
-							duration: videoDetailsData.items[key].contentDetails.duration.match(/(-)?P(?:([.,\d]+)Y)?(?:([.,\d]+)M)?(?:([.,\d]+)W)?(?:([.,\d]+)D)?T(?:([.,\d]+)H)?(?:([.,\d]+)M)?(?:([.,\d]+)S)?/)
-						}
-					})
-
-					console.log(videos, videoIds, urlSafe, videoDetailsData, videosWithDuration)
-
-					window.halo = data
-					window.kepo =videosWithDuration	
-					this.videos = videosWithDuration;
-				},
-				async code(code) {
-					if(code){
-						let backend = 'https://cph-kelaspendek.herokuapp.com'
-						if (window.location.hostname === "localhost" || window.location.hostname === "" || window.location.hostname === "127.0.0.1") {
-							backend = 'http://localhost:3000'
-						}
-						const {data} = await axios.get(`${backend}/?code=${this.code}`)
-						this.days = data;
-						if(data.length == 0 ){
-							this.incorrect = true;
-						}
-					}
-				}
-			},
-			async mounted(){
-				console.log(this.current_day);
-			}
-		})
-	</script>
+	<script src="/script.js"></script>
 </body>
 </html>
