@@ -61,7 +61,7 @@
 			watch: {
 				async selected_day() {
 					this.videos = [];
-					const {data} = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Csnippet&playlistId=${this.current_day.playlistId}&key=AIzaSyDf8w95QHTSC8UjNUMGefOHteP0R5n-lJY`)
+					const {data} = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Csnippet&playlistId=${this.current_day.playlistId}&key=AIzaSyDf8w95QHTSC8UjNUMGefOHteP0R5n-lJY&maxResults=50`)
 
 					const videos = data.items.map(video => {
 						return {
