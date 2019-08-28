@@ -9,7 +9,7 @@
 			<ul class="navbar-nav mr-auto">
 
 			</ul>
-			<a v-if="!$store.state.user" class="btn btn-danger text-white" @click="$auth.loginRedirect('/')" href="#" role="button">Login</a>
+			<a v-if="!$store.state.user" class="btn btn-danger text-white" @click="$auth.loginRedirect('/')" href="#" role="button">Login Member</a>
 			<span v-if="$store.state.user" class="navbar-text text-white pr-3">Halo, {{$store.state.user.name}}</span>
 			<a v-if="$store.state.user" class="btn btn-danger text-white" @click="$store.commit('removeUser'); $auth.logout(); $router.push('/')" href="#" role="button">Logout</a>
 		</div>

@@ -12,6 +12,9 @@
 	import Home from './Home.vue'
 	import VueRouter from 'vue-router'
 	import Auth from '@okta/okta-vue'
+	import youtubePlaylistVideosGetter from './youtubePlaylistVideosGetter'
+
+	window.youtubePlaylistVideosGetter = youtubePlaylistVideosGetter
 
 	const router = new VueRouter({
 		routes: [
