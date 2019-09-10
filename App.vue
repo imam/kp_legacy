@@ -1,5 +1,5 @@
 <template>	
-	<div class="container">	
+	<div>	
 		<Navbar></Navbar>	
 		<router-view></router-view>
 	</div>
@@ -10,6 +10,7 @@
 	import axios from 'axios'
 	import Navbar from './Navbar.vue'
 	import Home from './Home.vue'
+	import Login from './Login.vue'
 	import VueRouter from 'vue-router'
 	import Auth from '@okta/okta-vue'
 	import youtubePlaylistVideosGetter from './youtubePlaylistVideosGetter'
@@ -19,8 +20,10 @@
 	const router = new VueRouter({
 		routes: [
 		{path: '/', component: Home},
-		{path: '/implicit/callback', component: Auth.handleCallback()}
+		{path: '/implicit/callback', component: Auth.handleCallback()},
+		{path: '/login', component: Login},
 		],
+		
 		mode: 'history',
 	})
 
@@ -55,38 +58,7 @@
 		},
 		watch: {
 			async selected_day() {
-				this.videos = [];
-				const {data} = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Csnippet&playlistId=${this.current_day.playlistId}&key=AIzaSyDf8w95QHTSC8UjNUMGefOHteP0R5n-lJY`)
-
-				const videos = data.items.map(video => {
-					return {
-						title: video.snippet.title,
-						link: `https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}&list=PLp_AnBPM26vrPG7XxZgMssE4V80uJRhVe`,
-						id: video.snippet.resourceId.videoId
-					}
-				})
-
-				const videoIds = videos.map(video => {
-					return video.id
-				})
-
-				const urlSafe = encodeURIComponent(videoIds.join(','))
-
-				const {data: videoDetailsData} = await axios
-				.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${urlSafe}&key=AIzaSyDf8w95QHTSC8UjNUMGefOHteP0R5n-lJY`)
-
-				const videosWithDuration = videos.map((video, key) =>{
-					return {
-						...video,
-						duration: videoDetailsData.items[key].contentDetails.duration.match(/(-)?P(?:([.,\d]+)Y)?(?:([.,\d]+)M)?(?:([.,\d]+)W)?(?:([.,\d]+)D)?T(?:([.,\d]+)H)?(?:([.,\d]+)M)?(?:([.,\d]+)S)?/)
-					}
-				})
-
-				console.log(videos, videoIds, urlSafe, videoDetailsData, videosWithDuration)
-
-				window.halo = data
-				window.kepo =videosWithDuration	
-				this.videos = videosWithDuration;
+				
 			},
 			async code(code) {
 				if(code){
@@ -103,7 +75,15 @@
 			}
 		},
 		async mounted(){
-			this.$store.commit('setUser', await this.$auth.getUser());
+			if(this.$auth.isAuthenticated()){
+				this.$store.commit('setUser', await this.$auth.getUser());
+			}
 		},
 	}
 </script>
+
+<style>
+	body{
+		line-height: 35px;
+	}
+</style>

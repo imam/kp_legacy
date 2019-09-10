@@ -1,0 +1,1 @@
+PHP merupakan bahasa pemrograman terpopuler di dunia, tidak terkecuali di Indonesia. Di negara kita ini sendiri, tidak dapat disangkal PHP merupakan salah satu bahasa yang wajib dipelajari, jika kamu ingin mudah untuk mendapatkan pekerjaan sebagai web developer, maka dari itu, yuk gabung bersama kami, belajar bareng PHP!

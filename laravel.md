@@ -1,0 +1,1 @@
+Laravel merupakan Framework PHP, yang dapat sangat membantu dalam membuat aplikasi yang scalable, dan besar. Laravel dapat dikatakan sebuah teknologi yang modern, yang banyak dipakai oleh perusahaan-perusahaan yang ingin agar websitenya dapat tumbuh besar tanpa banyak kesulitan.

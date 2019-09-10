@@ -1,0 +1,1 @@
+React merupakan framework Javascript yang dapat dikatakan paling on-demand sekarang ini! Kita akan mempelajari framework ini secara mendalam, dari basic, sampai intermediate, dari state management sampai route, dari belajar via Codepen hingga kita akan membangun dari create-react-app. Dengan cara pembelajaran yang sangat efisien, yuk belajar bareng kami di kelas ini! 

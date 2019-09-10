@@ -1,0 +1,1 @@
+Vue.js merupakan sebuah framework yang amat populer, termasuk diantara top 3 framework Javascript yang digunakan. Kamu akan menemui beberapa startup menggunakannya dikarenakan kemudahan yang dimilikinya. Yuk mulai belajar bareng kami di kelas Vue.js ini!

@@ -1,0 +1,1 @@
+HTML dan CSS, adalah teknologi yang dibutuhkan ketika kamu pertama kali belajar dunia web development. Sementara Bootstrap adalah teknologi yang sangat membantu untuk membangun web pertama kamu. Di kelas kita kali ini, kita ada mempelajari 3 buah teknologi ini, dan kita akan membangun halaman web pertama kamu!

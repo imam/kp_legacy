@@ -1,0 +1,1 @@
+jQuery merupakan teknologi yang cukup populer yang dipakai untuk mempermudah membangun web. Sekalipun teknologi ini sudah cukup banyak yang meninggalkannya, tapi kenyataannya masih banyak perusahaan yang menggunakan teknologi ini dalam membangun webnya, terlebih perusahaan di Indonesia. Sehingga dengan memiliki skill ini, kamu bisa bersaing dengan banyak web developer lainnya!

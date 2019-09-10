@@ -9,7 +9,8 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		user: null
+		user: null,
+		isUserPremium: false
 	},
 	mutations: {
 		setUser(state, newUser) {
@@ -17,6 +18,9 @@ const store = new Vuex.Store({
 		},
 		removeUser(state) {
 			state.user = null
+		},
+		setUserPremium(state) {
+			state.isUserPremium = true
 		}
 	}
 })
